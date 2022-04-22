@@ -1,0 +1,4 @@
+FROM nginx-lua-1.21.6
+
+COPY nginx.pooling.conf /etc/nginx/nginx.conf
+COPY lua/ /etc/nginx/lua/

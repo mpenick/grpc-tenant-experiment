@@ -36,6 +36,14 @@ Setup DNS so that nginx will route requests to the correct "coordinators" (serve
 127.0.0.2 coord.def.test
 ```
 
+Note: I'm using `dnsmasq` to make DNS work properly with the following file `/etc/dnsmasq.d/local.conf`:
+
+```
+address=/.test/127.0.0.1
+```
+
+You'll need to set your `resolv.conf` or `systemd-resolved` setting to use `127.0.0.1` for DNS.
+
 ## To run
 
 ### Start proxy and gRPC servers
