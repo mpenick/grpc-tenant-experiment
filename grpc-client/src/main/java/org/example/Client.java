@@ -24,12 +24,16 @@ public class Client {
 
     GreeterBlockingStub stub = GreeterGrpc.newBlockingStub(channel);
 
-    HelloReply reply;
-    reply = stub.withCallCredentials(new TenantID("abc")).sayHello(HelloRequest.newBuilder().setName("Michael").build());
-    System.out.println(reply.getMessage());
+    for (int i = 0; i < 4000; ++i) {
+      HelloReply reply;
+      reply = stub.withCallCredentials(new TenantID("abc"))
+          .sayHello(HelloRequest.newBuilder().setName("Michael").build());
+      System.out.println(reply.getMessage());
+      Thread.sleep(2000);
+    }
 
-    reply = stub.withCallCredentials(new TenantID("def")).sayHello(HelloRequest.newBuilder().setName("Jack").build());
-    System.out.println(reply.getMessage());
+    //reply = stub.withCallCredentials(new TenantID("def")).sayHello(HelloRequest.newBuilder().setName("Jack").build());
+    //System.out.println(reply.getMessage());
   }
   public static class TenantID extends CallCredentials {
     public static final Metadata.Key<String> TENANT_ID_KEY =
